@@ -2,6 +2,7 @@
 from tkinter import messagebox
 from components.patterns import *
 from components.database import *
+from pages.new_batch import NewBatch
 
 # ===== VARIAVEIS =====
 JANELA_LARGURA = 900
@@ -51,10 +52,10 @@ class NewSlaughter:
         )
         botao1.pack(side="right")
 
-        # label da lote
+        # label da borda do lote
         label_lote = criar_label(label_abate, "Lotes dos Bovinos")
 
-        # tabela dos lotes
+        # tabela dos todos os lotes registrados
         colunas = ("ID", "Tipo de Bovinos", "Status do Lote", "Quant. Abatidos", "Visualizar")
 
         self.tabela = criar_tabela(label_lote, colunas)
@@ -71,7 +72,22 @@ class NewSlaughter:
         )
     
     def adicionar_lote(self):
-        messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
+        # exibição de mensagem sobre o tipo
+        resposta = messagebox.askyesnocancel(
+            "Tipo de Bovino no Lote",
+            "SIM = BOVINOS FEMEA P/ABATER\nNÃO = BOVINOS MACHO P/ABATER"
+        )
+
+        # validação e registro da resposta
+        if resposta is True:
+            tipo = "BOVINOS FEMEA P/ABATER"
+        elif resposta is False:
+            tipo = "BOVINOS MACHO P/ABATER"
+        else:
+            return
+        
+        self.janela.withdraw()
+        NewBatch(self, tipo)
     
     def visualizar_lote(self):
         messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")

@@ -4,10 +4,10 @@ from tkinter import ttk
 import platform
 import os
 
+# ===== VARIAVEIS =====
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # ===== FUNÇÕES =====
-
 # Função para criar uma janela
 def criar_janela(largura, altura, parent=None):
     if parent:
@@ -99,3 +99,29 @@ def criar_tabela(parent, dados):
     tabela.pack(fill="both", expand=True)
 
     return tabela
+
+# Função para criar titulos
+def criar_titulo(parent, informacao):
+    texto = tk.Label(
+        parent,
+        text = f'{informacao}',
+        font=("Arial", 24, "bold")
+    )
+    return texto
+
+# Função para criar texto
+def criar_texto(parent, informacao):
+    texto = tk.Label(
+        parent,
+        text = f'{informacao}',
+        font=("Arial", 12)
+    )
+    return texto
+
+# Função para criar input
+def criar_input(parent, funcao):
+    input = tk.Entry(parent)
+    input.pack(side="right")
+    input.bind("<Return>", funcao)
+
+    return input
