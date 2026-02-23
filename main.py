@@ -1,6 +1,7 @@
 # ===== IMPORTACOES =====
 from tkinter import messagebox
 from components.patterns import *
+from pages.new_slaughter import NewSlaughter
 
 # ===== VARIAVEIS =====
 JANELA_LARGURA = 310
@@ -8,7 +9,8 @@ JANELA_ALTURA = 140
 
 # ===== FUNÇÕES =====
 def abrir_novo_registro():
-    messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
+    janela.withdraw()
+    NewSlaughter(janela)
 
 def abrir_antigos_registro():
     messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
