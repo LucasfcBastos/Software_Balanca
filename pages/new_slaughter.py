@@ -3,6 +3,8 @@ from tkinter import messagebox
 from components.patterns import *
 from components.database import *
 from pages.new_batch import NewBatch
+from models.slaughter import Slaughter
+from models.batch import Batch
 
 # ===== VARIAVEIS =====
 JANELA_LARGURA = 900
@@ -24,6 +26,9 @@ class NewSlaughter:
             parent=parent
         )
         self.janela.protocol("WM_DELETE_WINDOW", self.fechar)
+
+        # instanciando a classe abate
+        self.abate = Slaughter()
 
         # label da borda do abate
         label_abate = criar_label(self.janela, "Abate de Bovinos")
@@ -86,8 +91,12 @@ class NewSlaughter:
         else:
             return
         
+        # instanciando a classe lote
+        novo_lote = Batch(tipo)
+
+        # abrir a nova tela
         self.janela.withdraw()
-        NewBatch(self, tipo)
+        NewBatch(self, self.abate, novo_lote)
     
     def visualizar_lote(self):
         messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")

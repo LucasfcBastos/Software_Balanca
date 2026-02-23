@@ -10,11 +10,13 @@ JANELA_ALTURA = 500
 class NewBatch:
 
     # ===== Função Principal
-    def __init__(self, parent, tipo_bovino):
+    def __init__(self, parent, abate, lote):
         
         # guardando objeto na instancia
         self.parent = parent
-
+        self.abate = abate
+        self.lote = lote
+        
         # janela
         self.janela = criar_janela(
                 JANELA_LARGURA,
@@ -29,7 +31,7 @@ class NewBatch:
         # container com a informação do tipo de bovino
         frame_texto = criar_frame(label_lote)
 
-        titulo = criar_titulo(frame_texto, tipo_bovino)
+        titulo = criar_titulo(frame_texto, self.lote.tipo_bovino)
         titulo.pack(side="left")
 
         # container com o texto é input para registrar
@@ -66,7 +68,7 @@ class NewBatch:
         botoao2.pack(side="right", padx=5)
 
     # ===== Função para adicionar um novo peso
-    def adicionar_peso(self):
+    def adicionar_peso(self, event):
         messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
 
     # ===== Função para salvar o lote
