@@ -177,8 +177,90 @@ class NewSlaughter:
         self.janela.withdraw()
         NewBatch(self, self.abate, lote)
 
+    # ===== Função finalizar o abate
     def finalizar_abate(self):
-        messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
+
+        # desabilita o botão para não haver miss-click
+        self.botao2.config(state="disabled")
+
+        # condição para validar se existem lote adicionado
+        if not self.abate.lotes:
+            messagebox.showwarning("Aviso", "Nenhum lote foi adicionado.")
+            self.botao2.config(state="normal")
+            return
+        
+        # verifica se todos os lotes estão finalizados
+        if not all(lote.status == "Lote Finalizado" for lote in self.abate.lotes):
+            messagebox.showwarning(
+                "Aviso",
+                "Todos os lotes precisam estar com status 'Lote Finalizado' antes de finalizar o abate."
+            )
+            self.botao2.config(state="normal")
+            return
+
+        # mensagem para validar se realmente vai finalizar o abate
+        confirmar = messagebox.askyesno(
+            "Finalizar Abate",
+            "Deseja realmente finalizar o abate?"
+        )
+
+        # condição para validar se vai finalizar ou não
+        if not confirmar:
+            return
+
+        # Carrega produtor e indústria
+        dados_produtor = carregar_produtor()
+        dados_industria = carregar_industria()
+
+        # lista de lotes vazios para ser adicionados
+        lista_lotes = []
+
+        # loop para ir em cada lote do abate
+        for lote in self.abate.lotes:
+
+            # lista de animais vazios para ser adicionados
+            lista_animais = []
+
+            # loop para ir em cada gado do lote
+            for animal in lote.animais:
+
+                # adiciona as informações do gado
+                lista_animais.append({
+                    "id": animal.id,
+                    "banda_a": round(animal.banda_a, 2),
+                    "banda_b": round(animal.banda_b, 2),
+                    "peso_total": round(animal.total_kg, 2),
+                    "peso_arroba": round(animal.arroba, 2)
+                })
+
+            #adiciona as informações do lote + informações do gaod
+            lista_lotes.append({
+                "tipo": lote.tipo_bovino,
+                "status": lote.status,
+                "quant": lote.quant,
+                "animais": lista_animais
+            })
+
+        # estrutura do abate para armazenar
+        dados_abate = {
+            "produtor": {
+                "nome": dados_produtor["Nome"]
+            },
+            "industria": {
+                "nome": dados_industria["Nome"]
+            },
+            "lotes": lista_lotes
+        }
+        
+        # função de database para salvar as informações
+        salvar_abate(dados_abate)
+
+        # mensagem de sucesso
+        messagebox.showinfo("Sucesso", "Abate salvo com sucesso!")
+
+        # volta pra tela anterior
+        self.janela.destroy()
+        self.parent.deiconify()
 
     # ===== Função para fehcar
     def fechar(self):
