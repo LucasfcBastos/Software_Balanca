@@ -7,7 +7,8 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # ===== FUNÇÕES =====
-# Função para puxar os dados do produtor
+
+# ===== Função para puxar os dados do produtor
 def carregar_produtor():
 
     # monta o caminho completo até o arquivo config/produtor.json
@@ -20,7 +21,7 @@ def carregar_produtor():
     # retorna o primeiro item da lista se existir, ou retorna vazio
     return dados[0] if dados else {}
 
-# Função para puxar os dados da industria
+# ===== Função para puxar os dados da industria
 def carregar_industria():
 
     # monta o caminho completo até o arquivo config/industria.json
@@ -33,7 +34,7 @@ def carregar_industria():
     # retorna o primeiro item da lista se existir, ou retorna vazio
     return dados[0] if dados else {}
 
-# Função para salvar o abate
+# ===== Função para salvar o abate
 def salvar_abate(dados_abate):
 
     # monta o caminho completo até o arquivo data/abates.json
@@ -70,3 +71,18 @@ def salvar_abate(dados_abate):
     with open(caminho, "w", encoding="utf-8") as f:
         # Salva a lista atualizada no arquivo
         json.dump(abates, f, indent=4, ensure_ascii=False)
+
+# ===== Função para salvar o abate
+def listar_abate():
+
+    # monta o caminho completo até o arquivo data/abates.json
+    caminho = os.path.join(BASE_DIR, "data", "abates.json")
+
+    if not os.path.exists(caminho):
+        return []
+
+    with open(caminho, "r", encoding="utf-8") as f:
+        try:
+            return json.load(f)
+        except:
+            return []
