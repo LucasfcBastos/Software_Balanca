@@ -14,3 +14,7 @@ class Slaughter:
         self.produtor_nome = dados_industria["Nome"]
         self.quantidade_lote = 0
         self.lotes = []
+
+    # ===== Função dicionar um novo lote
+    def adicionar(self, lote):
+        self.lotes.append(lote)

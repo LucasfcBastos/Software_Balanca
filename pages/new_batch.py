@@ -98,7 +98,7 @@ class NewBatch:
         # percorre todos os animais cadastados
         for animal in self.lote.animais:
 
-            #insere uma nova linha na tabela
+            # insere uma nova linha na tabela
             self.tabela.insert(
                 # item pai, insere no final e valores que aparecem
                 "",
@@ -114,11 +114,35 @@ class NewBatch:
 
     # ===== Função para salvar o lote
     def voltar_salvar(self):
-        messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
+        
+        # adiciona um novo lote dentro da lista
+        self.abate.adicionar(self.lote)
+        
+        # volta pra tela anterior, atualizando a tabela
+        self.janela.destroy()
+        self.parent.janela.deiconify()
+        self.parent.atualizar_tabela()
 
     # ===== Função para finalizar o lote
     def finalizar_lote(self):
-        messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
+        
+        # chama o função da classe batch
+        var = self.lote.finalizar()
+        
+        # verifica se é verdadeiro mesmo
+        if var is True:
+            
+            # adiciona um novo lote dentro da lista
+            self.abate.adicionar(self.lote)
+            
+            # volta pra tela anterior, atualizando a tabela
+            self.janela.destroy()
+            self.parent.janela.deiconify()
+            self.parent.atualizar_tabela()
+
+        else:
+
+            return messagebox.showerror("Erro", "Para finalizar, você deve adiciona uma banda.")
       
     # ===== Função para fehcar
     def fechar(self):

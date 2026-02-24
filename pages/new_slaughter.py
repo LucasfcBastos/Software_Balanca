@@ -98,7 +98,49 @@ class NewSlaughter:
         self.janela.withdraw()
         NewBatch(self, self.abate, novo_lote)
     
-    def visualizar_lote(self):
+    # ===== Função para atualizar a tabela de dados
+    def atualizar_tabela(self):
+
+        # remove todos os itens atuais da tabela
+        for item in self.tabela.get_children():
+            self.tabela.delete(item)
+
+        # percorre todos os lotes cadastados
+        for index, lote in enumerate(self.abate.lotes, start=1):
+
+            # se o estatus do lote for finalizado, exibe:
+            if lote.status == "Lote Finalizado":
+
+                # insere uma nova linha na tabela
+                self.tabela.insert(
+                    # item pai, insere no final e valores que aparecem
+                    "",
+                    "end",
+                    values=(
+                        index,
+                        lote.tipo_bovino,
+                        lote.status,
+                        lote.quant,
+                        "Não permitido"
+                    )
+                )
+            else:
+
+                # insere uma nova linha na tabela
+                self.tabela.insert(
+                    # item pai, insere no final e valores que aparecem
+                    "",
+                    "end",
+                    values=(
+                        index,
+                        lote.tipo_bovino,
+                        lote.status,
+                        lote.quant,
+                        "Permitido"
+                    )
+                )
+
+    def visualizar_lote(self, event):
         messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
 
     def finalizar_abate(self):

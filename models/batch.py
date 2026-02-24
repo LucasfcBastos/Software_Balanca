@@ -57,3 +57,16 @@ class Batch:
             self.status = "Em processo"
         
         return
+
+    # ===== Função de Finalizar
+    def finalizar(self):
+
+        # verificar se a quantidade é igual a 0
+        if self.quant == 0:
+            return False
+        
+        # atualizar os status
+        self.status = "Lote Finalizado"
+
+        # retorna verdadeiro
+        return True
