@@ -69,7 +69,48 @@ class NewBatch:
 
     # ===== Função para adicionar um novo peso
     def adicionar_peso(self, event):
-        messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
+        
+        # tenta converter o valor digitado para floar
+        try:
+            peso = float(self.input.get())
+
+        # caso o valor não seja numérico, gera error
+        except ValueError:
+            messagebox.showerror("Erro", "Digite um número válido.")
+            return
+    
+        # registrar o peso no lote
+        self.lote.registrar(peso)
+
+        # limpa o input após registrar o peso
+        self.input.delete(0, "end")
+
+        # chama a função para atualizar a tabela
+        self.atualizar_tabela()
+
+    # ===== Função para atualizar a tabela de dados
+    def atualizar_tabela(self):
+
+        # remove todos os itens atuais da tabela
+        for item in self.tabela.get_children():
+            self.tabela.delete(item)
+
+        # percorre todos os animais cadastados
+        for animal in self.lote.animais:
+
+            #insere uma nova linha na tabela
+            self.tabela.insert(
+                # item pai, insere no final e valores que aparecem
+                "",
+                "end",
+                values=(
+                animal.id,
+                f"{animal.banda_a:.2f}",
+                f"{animal.banda_b:.2f}",
+                f"{animal.total_kg:.2f}",
+                f"{animal.arroba:.2f}"
+                )
+            )
 
     # ===== Função para salvar o lote
     def voltar_salvar(self):
