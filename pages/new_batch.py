@@ -67,6 +67,9 @@ class NewBatch:
         )
         botoao2.pack(side="right", padx=5)
 
+        # chama a função para atualizar a tabela
+        self.atualizar_tabela()
+
     # ===== Função para adicionar um novo peso
     def adicionar_peso(self, event):
         
@@ -115,8 +118,11 @@ class NewBatch:
     # ===== Função para salvar o lote
     def voltar_salvar(self):
         
-        # adiciona um novo lote dentro da lista
-        self.abate.adicionar(self.lote)
+        # verifica se não existe esse lote dentro do abate
+        if self.lote not in self.abate.lotes:
+
+            # adiciona um novo lote dentro da lista se não existe
+            self.abate.adicionar(self.lote)
         
         # volta pra tela anterior, atualizando a tabela
         self.janela.destroy()
@@ -131,9 +137,12 @@ class NewBatch:
         
         # verifica se é verdadeiro mesmo
         if var is True:
-            
-            # adiciona um novo lote dentro da lista
-            self.abate.adicionar(self.lote)
+        
+            # verifica se não existe esse lote dentro do abate
+            if self.lote not in self.abate.lotes:
+                
+                # adiciona um novo lote dentro da lista se não existe
+                self.abate.adicionar(self.lote)
             
             # volta pra tela anterior, atualizando a tabela
             self.janela.destroy()

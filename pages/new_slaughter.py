@@ -140,8 +140,42 @@ class NewSlaughter:
                     )
                 )
 
+    # ===== Função visualizar lote selecionado
     def visualizar_lote(self, event):
-        messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
+    
+        # ele registrar o que foi selecionado
+        selecionado = self.tabela.selection()
+        
+        # validar se realmente foi selecionado algo
+        if not selecionado:
+            return
+
+        # pega o primeiro item da lista
+        item = selecionado[0]
+
+        # pega todos os valores das colunas
+        valores = self.tabela.item(item, "values")
+
+        # pega a informação da ultima coluna
+        coluna_visualizar = valores[4]
+
+        # valida se a ultima coluna não possue escrito "Permitido"
+        if coluna_visualizar != "Permitido":
+            messagebox.showwarning(
+                "Aviso",
+                "Este lote já foi finalizado e não pode ser visualizado."
+            )
+            return
+
+        # obtém o indice da linha selecionada
+        index = self.tabela.index(item)
+
+        # acessa o lote correspondente ao indice
+        lote = self.abate.lotes[index]
+
+        # abrir a nova tela
+        self.janela.withdraw()
+        NewBatch(self, self.abate, lote)
 
     def finalizar_abate(self):
         messagebox.showinfo("OPS, EM TRABALHO AINDA", "Essa função ainda estar em obra!")
