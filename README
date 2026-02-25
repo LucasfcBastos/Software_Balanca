@@ -1,0 +1,138 @@
+# 🐂 Sistema de Controle de Abate Bovino
+
+Sistema desktop desenvolvido em **Python** para controle de abates, organização por lotes e geração de relatórios profissionais em PDF.
+
+---
+
+# 📌 Tecnologias Utilizadas
+
+- Python 3
+- Tkinter (Interface gráfica)
+- ReportLab (Geração de PDF)
+- JSON (Armazenamento de dados)
+- OS (Manipulação de arquivos)
+- Datetime (Controle de datas)
+
+---
+
+# 🎯 Funcionalidades
+
+✔ Cadastro de abates  
+✔ Organização por lotes  
+✔ Controle de peso por animal (Banda A / Banda B)  
+✔ Cálculo automático de peso total  
+✔ Cálculo automático de arroba (@)  
+✔ Geração de relatório em PDF organizado  
+✔ Resumo automático com totais e médias  
+
+---
+
+# 🖥 Requisitos
+
+- Python 3.8 ou superior
+- Pip instalado
+
+---
+
+# 🚀 COMO FAZER O PROJETO FUNCIONAR
+
+## 1️⃣ Baixar o Projeto
+
+Extraia os arquivos em uma pasta, por exemplo:
+
+```
+meu-sistema-abate/
+```
+
+---
+
+## 2️⃣ Criar Ambiente Virtual (RECOMENDADO)
+
+Abra o terminal dentro da pasta do projeto e execute:
+
+### Windows:
+```bash
+python -m venv venv
+```
+
+### Linux / Mac:
+```bash
+python3 -m venv venv
+```
+
+---
+
+## 3️⃣ Ativar o Ambiente Virtual
+
+### Windows (PowerShell):
+```bash
+venv\Scripts\activate
+```
+
+### Windows (Git Bash):
+```bash
+source venv/Scripts/activate
+```
+
+### Linux / Mac:
+```bash
+source venv/bin/activate
+```
+
+Se ativado corretamente, aparecerá:
+
+```
+(venv)
+```
+
+---
+
+## 4️⃣ Instalar Dependências
+
+Com o ambiente virtual ativado:
+
+```bash
+pip install reportlab
+```
+
+### Tkinter
+
+O Tkinter normalmente já vem instalado com o Python.
+
+Se estiver no Linux (Ubuntu/Debian):
+
+```bash
+sudo apt install python3-tk
+```
+
+---
+
+## ▶ 5️⃣ Executar o Sistema
+
+Dentro da pasta do projeto:
+
+```bash
+python main.py
+```
+
+ou
+
+```bash
+python3 main.py
+```
+
+---
+
+# 📂 Estrutura do Projeto
+
+```
+components/
+│
+├── database.py      # Manipulação e leitura do JSON
+├── patterns.py      # Componentes visuais (Tkinter)
+├── export.py        # Geração do PDF com ReportLab
+│
+main.py              # Arquivo principal
+data.json            # Banco de dados local
+README.md
+```
